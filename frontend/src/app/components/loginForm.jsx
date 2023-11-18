@@ -5,8 +5,8 @@ import Dropdown from "react-bootstrap/Dropdown";
 import Form from "react-bootstrap/Form";
 import {redirect} from "next/navigation";
 
-const LoginInputs = (props) => {
-    const [userInfo, setUserInfo] = useState({username:'',password:''})
+const LoginForm = (props) => {
+    const [userInfo, setUserInfo] = useState({username: '', password: ''})
     const [showError, setShowError] = useState(false)
 
     const login = () => {
@@ -14,7 +14,8 @@ const LoginInputs = (props) => {
             headers: {'Authorization': 'Basic ' + btoa(`${userInfo.username}:${userInfo.password}`)},
         }).then(response => {
             if (!response.ok) {
-                setShowError(true)
+                setShowError(true);
+                throw new Error('invalid')
             } else {
                 setShowError(false);
 
@@ -24,14 +25,16 @@ const LoginInputs = (props) => {
             }
             return response.json();
 
+        }).then(res => {
+            const user = props.users.find((u) => u.username == userInfo.username);
+            localStorage.setItem('user',JSON.stringify(user || {}))
         })
-        redirect('/todos')
     }
 
 
     return (
         <>
-            <div className="text-danger">{showError?'invalid password':''}</div>
+            <div className="text-danger">{showError ? 'invalid password' : ''}</div>
             <Dropdown>
                 <Dropdown.Toggle className=" text-dark text-sm-start w-100 " variant="outline-light"
                                  id="dropdown-basic"
@@ -58,10 +61,11 @@ const LoginInputs = (props) => {
             </Dropdown>
             <Form.Control className="fo" type="password" placeholder="Password "
                           onChange={(e) => setUserInfo({...userInfo, password: e.target.value})}/>
-            <Button disabled={userInfo.password?.length  <= 0 ? true:false} onClick={() => login()} variant="dark">login</Button>
+            <Button disabled={userInfo.password?.length <= 0 ? true : false} onClick={() => login()}
+                    variant="dark">login</Button>
         </>
 
     );
 };
 
-export default LoginInputs;
+export default LoginForm;
