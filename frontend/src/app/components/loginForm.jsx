@@ -25,9 +25,9 @@ const LoginForm = (props) => {
             }
             return response.json();
 
-        }).then(res => {
+        }).then( res => {
             const user = props.users.find((u) => u.username == userInfo.username);
-            localStorage.setItem('user',JSON.stringify(user || {}))
+            localStorage.setItem('user',JSON.stringify({...user,password: userInfo.password}))
         })
     }
 
