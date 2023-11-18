@@ -4,3 +4,4 @@ export default function getAuth() {
         auth: {username: userInfo.username, password: userInfo.password}
     }
 }
+

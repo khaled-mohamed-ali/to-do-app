@@ -2,7 +2,6 @@ import React from 'react';
 import Form from 'react-bootstrap/Form';
 import {Col, Container, Row} from "react-bootstrap";
 import Dropdown from 'react-bootstrap/Dropdown';
-import {dividerClasses} from "@mui/material";
 import dynamic from "next/dynamic";
 
 
@@ -18,12 +17,11 @@ const Login = async () => {
     }
 
     const users = await getUsers();
-    console.log(users,'users')
 
     return (
-        <Container>
+        <Container className='h-100'>
             <Row className="justify-content-center" >
-                <Col className="col-sm-4 d-flex flex-column justify-content-around rounded-4" style={{height:"300px",border:"1px solid gray"}}>
+                <Col className="col-sm-8 col-lg-6 col-xs-10 d-flex flex-column mb-5 justify-content-around rounded-4" style={{height:"300px",border:"1px solid #c5c2c2"}}>
                     <LoginForm users={users || []}/>
                 </Col>
             </Row>
