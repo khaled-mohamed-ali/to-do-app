@@ -4,6 +4,7 @@ import {Row, Col, Button} from "react-bootstrap";
 import Dropdown from "react-bootstrap/Dropdown";
 import Form from "react-bootstrap/Form";
 import {useRouter} from "next/navigation";
+import styles from '../style/loginForm.module.css'
 import getAuth from "@/app/utils/getAuth";
 
 const LoginForm = (props) => {
@@ -11,6 +12,7 @@ const LoginForm = (props) => {
     const [showError, setShowError] = useState(false)
     const [userProf, setUserProf] = useState()
     const router = useRouter()
+
     const login = () => {
         fetch("http://localhost:4000/todos", {
             headers: {'Authorization': 'Basic ' + btoa(`${userInfo.username}:${userInfo.password}`)},
@@ -21,13 +23,10 @@ const LoginForm = (props) => {
             } else {
                 setShowError(false);
 
-                //1-  save username and password in local storage {}
-                //2- redirct to todo dashboard
-                //3-
             }
             return response.json();
 
-        }).then(res => {
+        }).then( () => {
             const user = props.users.find((u) => u.username == userInfo.username);
             localStorage.setItem('user', JSON.stringify({...user, password: userInfo.password}));
             router.push('/todos')
@@ -35,11 +34,15 @@ const LoginForm = (props) => {
     }
 
     return (
-        <>
-            <div className="text-danger">{showError ? 'invalid password or user name' : ''}</div>
-            <Dropdown>
-                <Dropdown.Toggle className=" text-dark text-sm-start w-100 " variant="outline-light"
-                                 id="dropdown-basic"
+        <div className='d-flex flex-column  gap-5 h-100'>
+            <div className="text-danger mt-3">
+                <h2 className="text-center text-secondary">
+                    Task master
+                </h2>
+                {showError ? 'invalid password or user name' : ''}
+            </div>
+            <Dropdown className="dro fo form-control p-0">
+                <Dropdown.Toggle id={`dropdown-basic`} className="text-dark text-sm-start w-100 " variant="outline-light"
                 >
                     {userInfo.username || 'select user'}
                 </Dropdown.Toggle>
@@ -70,7 +73,7 @@ const LoginForm = (props) => {
                           }}/>
             <Button disabled={userInfo.password?.length <= 0 ? true : false} onClick={() => login()}
                     variant="dark">login</Button>
-        </>
+        </div>
 
     );
 };

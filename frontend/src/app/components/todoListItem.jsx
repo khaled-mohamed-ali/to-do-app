@@ -31,13 +31,12 @@ const TodoListItem = (props) => {
             })
     }
 
-
     return (
         <>
             <div className="row px-3 align-items-end todo-item rounded">
                 <div className="col-auto m-1   d-flex align-items-center align-self-center">
                     <input type="checkbox" checked={completed}
-                           style={{width: '25px',height: '25px'}}
+                           style={{width: '25px', height: '25px'}}
                            onChange={(e) => saveTask(e)}
                     />
                 </div>

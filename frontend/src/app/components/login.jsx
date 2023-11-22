@@ -20,8 +20,10 @@ const Login = async () => {
 
     return (
         <Container className='h-100'>
-            <Row className="justify-content-center" >
-                <Col className="col-sm-8 col-lg-6 col-xs-10 d-flex flex-column mb-5 justify-content-around rounded-4" style={{height:"300px",border:"1px solid #c5c2c2"}}>
+            <Row className="justify-content-center">
+                <Col
+                    className="z-1 bg-white col-sm-7 col-lg-6 col-xs-10  mb-5  rounded-4"
+                    style={{height: "400px", border: ".1px solid #D8DCDD"}}>
                     <LoginForm users={users || []}/>
                 </Col>
             </Row>

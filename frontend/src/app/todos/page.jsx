@@ -8,7 +8,7 @@ import Navbar from "@/app/components/navbar";
 
 const Page = () => {
     return (
-        <div>
+        <div className='todos-container'>
             <Navbar/>
             <Todos/>
         </div>

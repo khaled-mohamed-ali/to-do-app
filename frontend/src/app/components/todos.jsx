@@ -28,7 +28,7 @@ const Todos = () => {
 
 
     return (
-        <div className="container m-5 p-2 rounded mx-auto bg-light shadow">
+        <div className="container todos m-5 p-2 rounded mx-auto bg-light shadow ">
             <div className="row m-1 p-3">
                 <div className="col col-11 mx-auto">
                     <div
