@@ -26,7 +26,7 @@ const LoginForm = (props) => {
             }
             return response.json();
 
-        }).then( () => {
+        }).then(() => {
             const user = props.users.find((u) => u.username == userInfo.username);
             localStorage.setItem('user', JSON.stringify({...user, password: userInfo.password}));
             router.push('/todos')
@@ -42,7 +42,8 @@ const LoginForm = (props) => {
                 {showError ? 'invalid password or user name' : ''}
             </div>
             <Dropdown className="dro fo form-control p-0">
-                <Dropdown.Toggle id={`dropdown-basic`} className="text-dark text-sm-start w-100 " variant="outline-light"
+                <Dropdown.Toggle id={`dropdown-basic`} className="text-dark text-sm-start w-100 "
+                                 variant="outline-light"
                 >
                     {userInfo.username || 'select user'}
                 </Dropdown.Toggle>
@@ -71,8 +72,14 @@ const LoginForm = (props) => {
                           onChange={(e) => {
                               setUserInfo({...userInfo, password: e.target.value})
                           }}/>
-            <Button disabled={userInfo.password?.length <= 0 ? true : false} onClick={() => login()}
-                    variant="dark">login</Button>
+            <Button
+                className="mb-3"
+                disabled={userInfo.password?.length <= 0 ? true : false}
+                onClick={() => login()}
+                variant="dark"
+            >
+                login
+            </Button>
         </div>
 
     );
